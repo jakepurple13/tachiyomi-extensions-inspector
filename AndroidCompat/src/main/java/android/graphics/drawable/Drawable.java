@@ -91,5 +91,38 @@ import java.util.Arrays;
  * document.</p></div>
  */
 public abstract class Drawable {
-
+    public static interface Callback {
+        /**
+         * Called when the drawable needs to be redrawn.  A view at this point
+         * should invalidate itself (or at least the part of itself where the
+         * drawable appears).
+         *
+         * @param who The drawable that is requesting the update.
+         */
+        public void invalidateDrawable(Drawable who);
+        /**
+         * A Drawable can call this to schedule the next frame of its
+         * animation.  An implementation can generally simply call
+         * {@link android.os.Handler#postAtTime(Runnable, Object, long)} with
+         * the parameters <var>(what, who, when)</var> to perform the
+         * scheduling.
+         *
+         * @param who The drawable being scheduled.
+         * @param what The action to execute.
+         * @param when The time (in milliseconds) to run.  The timebase is
+         *             {@link android.os.SystemClock#uptimeMillis}
+         */
+        public void scheduleDrawable(Drawable who, Runnable what, long when);
+        /**
+         * A Drawable can call this to unschedule an action previously
+         * scheduled with {@link #scheduleDrawable}.  An implementation can
+         * generally simply call
+         * {@link android.os.Handler#removeCallbacks(Runnable, Object)} with
+         * the parameters <var>(what, who)</var> to unschedule the drawable.
+         *
+         * @param who The drawable being unscheduled.
+         * @param what The action being unscheduled.
+         */
+        public void unscheduleDrawable(Drawable who, Runnable what);
+    }
 }
