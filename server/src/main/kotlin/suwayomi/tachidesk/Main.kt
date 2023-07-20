@@ -58,15 +58,14 @@ data class SourceJson(
     val versionId: Int,
     val hasCloudflare: Short
 ) {
-    constructor(source: SourceInformation) :
-            this(
-                source.name,
-                "en",
-                source.name,
-                source.apiService.baseUrl,
-                1,
-                1
-            )
+    constructor(source: SourceInformation) : this(
+        source.name,
+        "en",
+        source.name,
+        source.apiService.baseUrl,
+        1,
+        1
+    )
 }
 
 private fun Boolean.toShort(): Short = if (this) 1 else 0
