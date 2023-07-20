@@ -67,6 +67,7 @@ zip --delete android.jar 'android/net/Uri$Builder.class'
 zip --delete android.jar android/os/Environment.class
 zip --delete android.jar android/text/format/Formatter.class
 zip --delete android.jar android/text/Html.class
+zip --delete android.jar android/graphics/drawable/Drawable.class
 
 # Dedup overridden Android classes
 ABS_JAR="$(realpath android.jar)"
