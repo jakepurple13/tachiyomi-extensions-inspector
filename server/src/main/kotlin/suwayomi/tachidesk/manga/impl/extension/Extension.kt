@@ -7,9 +7,10 @@ package suwayomi.tachidesk.manga.impl.extension
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
-import eu.kanade.tachiyomi.source.Source
-import eu.kanade.tachiyomi.source.SourceFactory
-import eu.kanade.tachiyomi.source.online.HttpSource
+import com.programmersbox.models.ApiService
+import com.programmersbox.models.ApiServicesCatalog
+import com.programmersbox.models.ExternalApiServicesCatalog
+import com.programmersbox.models.SourceInformation
 import mu.KotlinLogging
 import suwayomi.tachidesk.manga.impl.util.PackageTools.EXTENSION_FEATURE
 import suwayomi.tachidesk.manga.impl.util.PackageTools.LIB_VERSION_MAX
@@ -23,7 +24,7 @@ import java.io.File
 object Extension {
     private val logger = KotlinLogging.logger {}
 
-    suspend fun installAPK(tmpDir: File, fetcher: suspend () -> File): Pair<String, List<HttpSource>> {
+    suspend fun installAPK(tmpDir: File, fetcher: suspend () -> File): Pair<String, List<SourceInformation>> {
         val apkFile = fetcher()
 
         val jarFile = File(tmpDir, "${apkFile.nameWithoutExtension}.jar")
@@ -31,7 +32,7 @@ object Extension {
         val packageInfo = getPackageInfo(apkFile.absolutePath)
 
         if (!packageInfo.reqFeatures.orEmpty().any { it.name == EXTENSION_FEATURE }) {
-            throw Exception("This apk is not a Tachiyomi extension")
+            throw Exception("This apk is not an OtakuWorld extension")
         }
 
         // Validate lib version
@@ -51,9 +52,36 @@ object Extension {
 
         // collect sources from the extension
         return packageInfo.packageName to when (val instance = loadExtensionSources(jarFile.absolutePath, className)) {
-            is ApiService -> listOf(instance).filterIsInstance<HttpSource>()
-            is ExternalApiServicesCatalog -> instance.createSources().filterIsInstance<HttpSource>()
-            is ApiServicesCatalog -> instance.createSources().filterIsInstance<HttpSource>()
+            is ApiService -> listOf(
+                SourceInformation(
+                    apiService = instance,
+                    name = instance.serviceName,
+                    icon = null,
+                    packageName = "",
+                    null
+                )
+            )
+
+            is ExternalApiServicesCatalog -> listOf(
+                SourceInformation(
+                    apiService = instance.createSources().random(),
+                    name = instance.name,
+                    icon = null,
+                    packageName = "",
+                    instance
+                )
+            )
+
+            is ApiServicesCatalog -> listOf(
+                SourceInformation(
+                    apiService = instance.createSources().random(),
+                    name = instance.name,
+                    icon = null,
+                    packageName = "",
+                    instance
+                )
+            )
+
             else -> throw RuntimeException("Unknown source class type! ${instance.javaClass}")
         }
     }
