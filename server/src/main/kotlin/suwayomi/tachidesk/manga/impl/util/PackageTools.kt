@@ -127,10 +127,10 @@ object PackageTools {
         println(className)
         println(classToLoad.getDeclaredConstructor().toGenericString())
         val c = classToLoad.kotlin
-        val s = c.constructors.single()
+        //val s = c.constructors.single()
         //val s = c.primaryConstructor//getDeclaredConstructor().kotlinFunction
-        s?.isAccessible = true
-        println(s)
-        return s!!.call()//classToLoad.getDeclaredConstructor().newInstance()
+        //s?.isAccessible = true
+        //println(s)
+        return c.objectInstance!!//s!!.call()//classToLoad.getDeclaredConstructor().newInstance()
     }
 }
