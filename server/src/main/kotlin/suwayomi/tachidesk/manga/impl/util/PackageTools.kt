@@ -120,6 +120,9 @@ object PackageTools {
     fun loadExtensionSources(jarPath: String, className: String): Any {
         val classLoader = URLClassLoader(arrayOf<URL>(URL("file:$jarPath")))
         val classToLoad = Class.forName(className, false, classLoader)
+        println(classToLoad)
+        println(className)
+        println(classToLoad.getDeclaredConstructor().toGenericString())
         return classToLoad.getDeclaredConstructor().newInstance()
     }
 }

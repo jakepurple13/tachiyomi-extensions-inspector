@@ -13,8 +13,6 @@ import com.programmersbox.models.ExternalApiServicesCatalog
 import com.programmersbox.models.SourceInformation
 import mu.KotlinLogging
 import suwayomi.tachidesk.manga.impl.util.PackageTools.EXTENSION_FEATURE
-import suwayomi.tachidesk.manga.impl.util.PackageTools.LIB_VERSION_MAX
-import suwayomi.tachidesk.manga.impl.util.PackageTools.LIB_VERSION_MIN
 import suwayomi.tachidesk.manga.impl.util.PackageTools.METADATA_SOURCE_CLASS
 import suwayomi.tachidesk.manga.impl.util.PackageTools.dex2jar
 import suwayomi.tachidesk.manga.impl.util.PackageTools.getPackageInfo
