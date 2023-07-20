@@ -26,6 +26,7 @@ import java.net.URLClassLoader
 import java.nio.file.Files
 import java.nio.file.Path
 import javax.xml.parsers.DocumentBuilderFactory
+import kotlin.reflect.full.primaryConstructor
 import kotlin.reflect.jvm.isAccessible
 import kotlin.reflect.jvm.kotlinFunction
 
@@ -125,7 +126,9 @@ object PackageTools {
         println(classToLoad)
         println(className)
         println(classToLoad.getDeclaredConstructor().toGenericString())
-        val s = classToLoad.getDeclaredConstructor().kotlinFunction
+        val c = classToLoad.kotlin
+        val s = c.constructors.single()
+        //val s = c.primaryConstructor//getDeclaredConstructor().kotlinFunction
         s?.isAccessible = true
         println(s)
         return s!!.call()//classToLoad.getDeclaredConstructor().newInstance()
