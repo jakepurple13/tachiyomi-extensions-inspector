@@ -30,8 +30,8 @@ import javax.xml.parsers.DocumentBuilderFactory
 object PackageTools {
     private val logger = KotlinLogging.logger {}
 
-    const val EXTENSION_FEATURE = "tachiyomi.extension"
-    const val METADATA_SOURCE_CLASS = "tachiyomi.extension.class"
+    const val EXTENSION_FEATURE = "programmersbox.otaku.extension"
+    const val METADATA_SOURCE_CLASS = "programmersbox.otaku.class"
     const val LIB_VERSION_MIN = 1.3
     const val LIB_VERSION_MAX = 1.4
 

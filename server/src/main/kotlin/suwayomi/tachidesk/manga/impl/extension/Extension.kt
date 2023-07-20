@@ -51,8 +51,9 @@ object Extension {
 
         // collect sources from the extension
         return packageInfo.packageName to when (val instance = loadExtensionSources(jarFile.absolutePath, className)) {
-            is Source -> listOf(instance).filterIsInstance<HttpSource>()
-            is SourceFactory -> instance.createSources().filterIsInstance<HttpSource>()
+            is ApiService -> listOf(instance).filterIsInstance<HttpSource>()
+            is ExternalApiServicesCatalog -> instance.createSources().filterIsInstance<HttpSource>()
+            is ApiServicesCatalog -> instance.createSources().filterIsInstance<HttpSource>()
             else -> throw RuntimeException("Unknown source class type! ${instance.javaClass}")
         }
     }
