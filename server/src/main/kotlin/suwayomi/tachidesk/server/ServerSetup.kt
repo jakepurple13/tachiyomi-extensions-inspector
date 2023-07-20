@@ -8,10 +8,17 @@ package suwayomi.tachidesk.server
  * file, You can obtain one at https://mozilla.org/MPL/2.0/.
  */
 
+import android.app.Application
+import android.content.Context
 import eu.kanade.tachiyomi.App
 import mu.KotlinLogging
 import org.kodein.di.DI
 import org.kodein.di.conf.global
+import org.koin.core.context.GlobalContext
+import org.koin.core.context.loadKoinModules
+import org.koin.core.context.startKoin
+import org.koin.dsl.binds
+import org.koin.dsl.module
 import suwayomi.server.BuildConfig
 import xyz.nulldev.androidcompat.AndroidCompat
 import xyz.nulldev.androidcompat.AndroidCompatInitializer
@@ -28,6 +35,14 @@ fun applicationSetup() {
     DI.global.addImport(ConfigKodeinModule().create())
     // Load Android compatibility dependencies
     AndroidCompatInitializer().init()
+    val app = App()
     // start app
-    androidCompat.startApp(App())
+    androidCompat.startApp(app)
+    startKoin {
+        loadKoinModules(
+            module {
+                single { app } binds arrayOf(Context::class, Application::class)
+            }
+        )
+    }
 }

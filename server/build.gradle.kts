@@ -43,6 +43,8 @@ dependencies {
 
     // Testing
     testImplementation(kotlin("test-junit5"))
+
+    implementation("io.insert-koin:koin-core:3.2.0")
 }
 
 val MainClass = "suwayomi.tachidesk.MainKt"
