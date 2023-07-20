@@ -31,6 +31,10 @@ object Extension {
 
         val packageInfo = getPackageInfo(apkFile.absolutePath)
 
+        println(packageInfo.packageName)
+        packageInfo.reqFeatures.forEach {
+            println(it.name)
+        }
         if (!packageInfo.reqFeatures.orEmpty().any { it.name == EXTENSION_FEATURE }) {
             throw Exception("This apk is not an OtakuWorld extension")
         }
