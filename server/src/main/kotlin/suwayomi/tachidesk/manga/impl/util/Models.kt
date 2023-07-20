@@ -1,6 +1,7 @@
 package com.programmersbox.models
 
 import android.app.Application
+import android.graphics.drawable.Drawable
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
@@ -181,7 +182,7 @@ data class Sources(
 data class SourceInformation(
     val apiService: ApiService,
     val name: String,
-    val icon: Any?,
+    val icon: Drawable?,
     val packageName: String,
     val catalog: ApiServicesCatalog? = null
 )
