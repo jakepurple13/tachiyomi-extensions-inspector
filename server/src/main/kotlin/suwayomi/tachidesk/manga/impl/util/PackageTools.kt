@@ -123,6 +123,8 @@ object PackageTools {
         println(classToLoad)
         println(className)
         println(classToLoad.getDeclaredConstructor().toGenericString())
+        classToLoad.getDeclaredConstructor().isAccessible = true
+        println(classToLoad.getDeclaredConstructor().toGenericString())
         return classToLoad.getDeclaredConstructor().newInstance()
     }
 }
