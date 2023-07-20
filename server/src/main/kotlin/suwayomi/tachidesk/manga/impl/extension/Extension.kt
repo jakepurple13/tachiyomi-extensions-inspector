@@ -36,13 +36,13 @@ object Extension {
         }
 
         // Validate lib version
-        val libVersion = packageInfo.versionName.substringBeforeLast('.').toDouble()
+        /*val libVersion = packageInfo.versionName.substringBeforeLast('.').toDouble()
         if (libVersion < LIB_VERSION_MIN || libVersion > LIB_VERSION_MAX) {
             throw Exception(
                 "Lib version is $libVersion, while only versions " +
                     "$LIB_VERSION_MIN to $LIB_VERSION_MAX are allowed"
             )
-        }
+        }*/
 
         val className = packageInfo.packageName + packageInfo.applicationInfo.metaData.getString(METADATA_SOURCE_CLASS)
 
