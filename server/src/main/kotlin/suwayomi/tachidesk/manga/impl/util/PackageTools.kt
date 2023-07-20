@@ -26,6 +26,8 @@ import java.net.URLClassLoader
 import java.nio.file.Files
 import java.nio.file.Path
 import javax.xml.parsers.DocumentBuilderFactory
+import kotlin.reflect.jvm.isAccessible
+import kotlin.reflect.jvm.kotlinFunction
 
 object PackageTools {
     private val logger = KotlinLogging.logger {}
@@ -123,8 +125,9 @@ object PackageTools {
         println(classToLoad)
         println(className)
         println(classToLoad.getDeclaredConstructor().toGenericString())
-        classToLoad.getDeclaredConstructor().isAccessible = true
-        println(classToLoad.getDeclaredConstructor().toGenericString())
-        return classToLoad.getDeclaredConstructor().newInstance()
+        val s = classToLoad.getDeclaredConstructor().kotlinFunction
+        s?.isAccessible = true
+        println(s)
+        return s!!.call()//classToLoad.getDeclaredConstructor().newInstance()
     }
 }
