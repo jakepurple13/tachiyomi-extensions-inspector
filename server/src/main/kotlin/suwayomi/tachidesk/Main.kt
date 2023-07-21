@@ -44,6 +44,7 @@ suspend fun main(args: Array<String>) {
         logger.debug("Installing $it")
         runCatching { Extension.installAPK(tmpDir) { it.toFile() } }.fold(
             onSuccess = { info ->
+                println("Success with: $info")
                 info.first to info.second.map { source -> SourceJson(source) }
             },
             onFailure = { "" to emptyList() }
