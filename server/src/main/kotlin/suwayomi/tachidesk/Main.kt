@@ -66,7 +66,6 @@ suspend fun main(args: Array<String>) {
         }*/
         //.filter { it.key.isNotBlank() }
 
-    println(Json.encodeToString(extensionsInfo))
     File(outputPath).writeText(Json.encodeToString(extensionsInfo))
 }
 
