@@ -40,16 +40,31 @@ suspend fun main(args: Array<String>) {
 
     logger.info("Found ${extensions.size} extensions")
 
-    val extensionsInfo = extensions.associate {
-        logger.debug("Installing $it")
-        runCatching { Extension.installAPK(tmpDir) { it.toFile() } }.fold(
-            onSuccess = { info ->
-                println("Success with: $info")
-                info.first to info.second.map { source -> SourceJson(source) }
-            },
-            onFailure = { "" to emptyList() }
-        )
-    }
+    val extensionsInfo = extensions
+        .mapNotNull {
+            logger.debug("Installing $it")
+            runCatching { Extension.installAPK(tmpDir) { it.toFile() } }
+                .fold(
+                    onSuccess = { info ->
+                        println("Success with: $info")
+                        info.first to info.second.map { source -> SourceJson(source) }
+                    },
+                    onFailure = { null }
+                )
+        }
+        .toMap()
+        .onEach { println("${it.key} | ${it.value}") }
+        /*.associate {
+            logger.debug("Installing $it")
+            runCatching { Extension.installAPK(tmpDir) { it.toFile() } }.fold(
+                onSuccess = { info ->
+                    println("Success with: $info")
+                    info.first to info.second.map { source -> SourceJson(source) }
+                },
+                onFailure = { "" to emptyList() }
+            )
+        }*/
+        //.filter { it.key.isNotBlank() }
 
     File(outputPath).writeText(Json.encodeToString(extensionsInfo))
 }
