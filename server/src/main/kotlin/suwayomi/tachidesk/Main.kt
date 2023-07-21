@@ -67,6 +67,10 @@ suspend fun main(args: Array<String>) {
         //.filter { it.key.isNotBlank() }
 
     File(outputPath).writeText(Json.encodeToString(extensionsInfo))
+    File(outputPath).also {
+        println(it.exists())
+        println(it.readText())
+    }
 }
 
 @Serializable
