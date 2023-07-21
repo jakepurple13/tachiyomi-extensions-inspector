@@ -42,9 +42,14 @@ suspend fun main(args: Array<String>) {
 
     val extensionsInfo = extensions.associate {
         logger.debug("Installing $it")
-        val (pkgName, sources) = Extension.installAPK(tmpDir) { it.toFile() }
-        pkgName to sources.map { source -> SourceJson(source) }
+        runCatching { Extension.installAPK(tmpDir) { it.toFile() } }.fold(
+            onSuccess = { info ->
+                info.first to info.second.map { source -> SourceJson(source) }
+            },
+            onFailure = { "" to emptyList() }
+        )
     }
+        .filter { it.key.isNotBlank() }
 
     File(outputPath).writeText(Json.encodeToString(extensionsInfo))
 }
