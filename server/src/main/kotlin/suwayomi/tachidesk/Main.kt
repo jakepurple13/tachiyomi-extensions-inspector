@@ -50,7 +50,6 @@ suspend fun main(args: Array<String>) {
             onFailure = { "" to emptyList() }
         )
     }
-        .filter { it.key.isNotBlank() }
 
     File(outputPath).writeText(Json.encodeToString(extensionsInfo))
 }
