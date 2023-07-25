@@ -49,7 +49,10 @@ suspend fun main(args: Array<String>) {
                         println("Success with: $info")
                         info.first to info.second.map { source -> SourceJson(source) }
                     },
-                    onFailure = { null }
+                    onFailure = { t ->
+                        t.printStackTrace()
+                        null
+                    }
                 )
         }
         .toMap()
