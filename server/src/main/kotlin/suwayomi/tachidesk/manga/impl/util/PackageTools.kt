@@ -131,6 +131,10 @@ object PackageTools {
         //val s = c.primaryConstructor//getDeclaredConstructor().kotlinFunction
         //s?.isAccessible = true
         //println(s)
-        return c.objectInstance!!//s!!.call()//classToLoad.getDeclaredConstructor().newInstance()
+        return runCatching { classToLoad.getDeclaredConstructor().newInstance() }//s!!.call()//classToLoad.getDeclaredConstructor().newInstance()
+            .fold(
+                onSuccess = { it },
+                onFailure = { c.objectInstance!! }
+            )
     }
 }
