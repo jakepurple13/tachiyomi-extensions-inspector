@@ -37,12 +37,6 @@ object Extension {
             throw Exception("This apk is not an OtakuWorld extension")
         }
 
-        val type = packageInfo.reqFeatures
-            .find { it.name.contains(EXTENSION_FEATURE, true) }!!
-            .name
-            .split(".")
-            .last()
-
         // Validate lib version
         /*val libVersion = packageInfo.versionName.substringBeforeLast('.').toDouble()
         if (libVersion < LIB_VERSION_MIN || libVersion > LIB_VERSION_MAX) {
@@ -66,7 +60,6 @@ object Extension {
                     name = instance.serviceName,
                     icon = null,
                     packageName = packageInfo.packageName,
-                    type = type,
                     catalog = null
                 )
             )
@@ -77,7 +70,6 @@ object Extension {
                     name = instance.name,
                     icon = null,
                     packageName = packageInfo.packageName,
-                    type = type,
                     catalog = instance
                 )
             )
@@ -88,7 +80,6 @@ object Extension {
                     name = instance.name,
                     icon = null,
                     packageName = packageInfo.packageName,
-                    type = type,
                     catalog = instance
                 )
             )

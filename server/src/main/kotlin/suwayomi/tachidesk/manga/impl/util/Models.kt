@@ -184,6 +184,5 @@ data class SourceInformation(
     val name: String,
     val icon: Drawable?,
     val packageName: String,
-    val type: String,
     val catalog: ApiServicesCatalog? = null
 )

@@ -81,7 +81,6 @@ data class SourceJson(
     val baseUrl: String,
     val versionId: Int,
     val hasCloudflare: Short,
-    val type: String
 ) {
     constructor(source: SourceInformation) : this(
         source.name,
@@ -90,7 +89,6 @@ data class SourceJson(
         source.apiService.baseUrl,
         1,
         1,
-        source.type
     )
 }
 
