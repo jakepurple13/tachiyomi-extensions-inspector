@@ -7,10 +7,7 @@ package suwayomi.tachidesk.manga.impl.extension
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
-import com.programmersbox.models.ApiService
-import com.programmersbox.models.ApiServicesCatalog
-import com.programmersbox.models.ExternalApiServicesCatalog
-import com.programmersbox.models.SourceInformation
+import com.programmersbox.models.*
 import mu.KotlinLogging
 import suwayomi.tachidesk.manga.impl.util.PackageTools.EXTENSION_FEATURE
 import suwayomi.tachidesk.manga.impl.util.PackageTools.METADATA_SOURCE_CLASS
@@ -61,6 +58,16 @@ object Extension {
                     icon = null,
                     packageName = packageInfo.packageName,
                     catalog = null
+                )
+            )
+
+            is ExternalCustomApiServicesCatalog -> listOf(
+                SourceInformation(
+                    apiService = instance.createSources().random(),
+                    name = instance.name,
+                    icon = null,
+                    packageName = packageInfo.packageName,
+                    catalog = instance
                 )
             )
 
