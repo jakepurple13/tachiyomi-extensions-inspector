@@ -1,7 +1,7 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import org.jmailen.gradle.kotlinter.tasks.FormatTask
-import org.jmailen.gradle.kotlinter.tasks.LintTask
+//import org.jmailen.gradle.kotlinter.tasks.FormatTask
+//import org.jmailen.gradle.kotlinter.tasks.LintTask
 import java.io.BufferedReader
 
 plugins {
@@ -133,13 +133,13 @@ tasks {
         dependsOn("formatKotlin", "lintKotlin")
     }
 
-    withType<LintTask> {
+    /*withType<LintTask> {
         source(files("src/kotlin"))
     }
 
     withType<FormatTask> {
         source(files("src/kotlin"))
-    }
+    }*/
 
     withType<ProcessResources> {
         duplicatesStrategy = DuplicatesStrategy.WARN
