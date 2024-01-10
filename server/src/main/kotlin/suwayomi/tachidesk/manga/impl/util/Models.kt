@@ -168,6 +168,11 @@ interface ExternalApiServicesCatalog : ApiServicesCatalog {
     fun shouldReload(packageName: String, packageInfo: PackageInfo): Boolean = false
 }
 
+interface ExternalCustomApiServicesCatalog : ExternalApiServicesCatalog {
+
+    val baseUrl: String
+}
+
 data class RemoteSources(
     val name: String,
     val iconUrl: String,
