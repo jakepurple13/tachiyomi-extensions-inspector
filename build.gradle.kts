@@ -3,7 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     kotlin("jvm") version "1.8.0"
     kotlin("plugin.serialization") version "1.8.0" apply false
-    id("org.jmailen.kotlinter") version "3.9.0" apply false
+    //id("org.jmailen.kotlinter") version "3.9.0" apply false
     id("com.github.gmazzo.buildconfig") version "3.0.3" apply false
     id("com.github.johnrengelman.shadow") version "7.1.2" apply false
 }
