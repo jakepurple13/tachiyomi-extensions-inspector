@@ -8,7 +8,7 @@ plugins {
     application
     kotlin("jvm")
     kotlin("plugin.serialization")
-    id("org.jmailen.kotlinter")
+    //id("org.jmailen.kotlinter")
     id("com.github.johnrengelman.shadow")
     id("com.github.gmazzo.buildconfig")
 }
